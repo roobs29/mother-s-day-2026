@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1c1611" />
+  <meta name="description" content="A love letter, written in light. For Mum." />
+  <title>For You, Amma — A Love Letter</title>
+
+  <!-- Preconnect to font CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!--
+    Typography pairing:
+    - Cormorant Garamond  : editorial display serif (italic for emotional emphasis)
+    - Manrope             : clean modern sans for body
+    - Caveat              : handwritten letter texture
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Tiny inline SVG favicon: a soft gold sun -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='14' fill='%23d9b677'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ─────────────────────────────────────────────
+       LOADING SCREEN
+       Elegant first impression: a thin gold line
+       draws across, name fades in, then dissolves.
+       ───────────────────────────────────────────── -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <span class="loader__line"></span>
+      <p class="loader__text">Preparing something for you…</p>
+      <span class="loader__line loader__line--bottom"></span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────
+       AMBIENT GRAIN OVERLAY (film grain)
+       Sits over everything, very subtle.
+       ───────────────────────────────────────────── -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ─────────────────────────────────────────────
+       CUSTOM CURSOR (desktop only, disabled on touch)
+       ───────────────────────────────────────────── -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────
+       AMBIENT MUSIC TOGGLE
+       Floats top-right; gracefully handles missing audio file.
+       ───────────────────────────────────────────── -->
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle ambient music" data-cursor="hover">
+    <span class="music-toggle__bars" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </span>
+    <span class="music-toggle__label">music</span>
+  </button>
+  <audio id="ambientAudio" loop preload="none">
+    <source src="assets/audio/ambient.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ─────────────────────────────────────────────
+       PROGRESS THREAD (top of page)
+       A single hairline of gold tracking scroll.
+       ───────────────────────────────────────────── -->
+  <div class="thread" aria-hidden="true"><div class="thread__fill" id="threadFill"></div></div>
+
+  <main id="smooth-content">
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 01 · HERO
+         ═════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <!-- Canvas particle field, painted by JS -->
+      <canvas class="hero__canvas" id="particleCanvas" aria-hidden="true"></canvas>
+
+      <!-- Soft warm gradient mesh (CSS) -->
+      <div class="hero__atmosphere" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--centered" data-reveal="up">
+          <span class="eyebrow__line"></span>
+          <span>A letter, in light</span>
+          <span class="eyebrow__line"></span>
+        </p>
+
+        <h1 class="hero__title">
+          <span class="line" data-reveal="line">For the woman</span>
+          <span class="line" data-reveal="line"><em>who made everything</em></span>
+          <span class="line" data-reveal="line">possible.</span>
+        </h1>
+
+        <p class="hero__subtitle" data-reveal="up">
+          Some stories don't begin with words.<br />They begin with you.
+        </p>
+
+        <a href="#chapter-one" class="cta" data-reveal="up" data-cursor="hover" data-scroll-to>
+          <span class="cta__label">Begin the journey</span>
+          <span class="cta__arrow" aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-cue" aria-hidden="true">
+        <span class="scroll-cue__line"></span>
+        <span class="scroll-cue__text">scroll</span>
+      </div>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 02 · IMMERSIVE STORY (4 chapters)
+         ═════════════════════════════════════════════ -->
+    <section class="story" aria-label="Chapters">
+
+      <!-- Chapter intro -->
+      <div class="story__intro">
+        <span class="chapter-mark" data-reveal="up">I — IV</span>
+        <h2 class="story__heading" data-reveal="up">
+          Four small chapters,<br /><em>about everything you are.</em>
+        </h2>
+      </div>
+
+      <!-- Chapter 01 -->
+      <article class="chapter" id="chapter-one">
+        <div class="chapter__media chapter__media--left">
+          <figure class="frame" data-parallax="0.05">
+            <div class="frame__inner">
+              <img class="frame__img" loading="lazy"
+                   src="assets/images/story-01.jpg"
+                   alt="A photograph placeholder representing earliest days." />
+            </div>
+            <figcaption class="frame__caption">No. 01 — first light</figcaption>
+          </figure>
+        </div>
+        <div class="chapter__text">
+          <span class="chapter__number" data-reveal="up">Chapter One</span>
+          <h3 class="chapter__title" data-reveal="up">
+            You were there for <em>every first.</em>
+          </h3>
+          <p class="chapter__body" data-reveal="up">
+            You were there before the world even knew my name. The first heartbeat.
+            The first breath. The first small cry you somehow translated into love.
+            Every beginning I have is, in some quiet way, yours.
+          </p>
+          <p class="chapter__body chapter__body--small" data-reveal="up">
+            And you have been there, gently, at every threshold since.
+          </p>
+        </div>
+      </article>
+
+      <!-- Chapter 02 -->
+      <article class="chapter chapter--reverse">
+        <div class="chapter__media chapter__media--right">
+          <figure class="frame frame--tall" data-parallax="0.08">
+            <div class="frame__inner">
+              <img class="frame__img" loading="lazy"
+                   src="assets/images/story-02.jpg"
+                   alt="A photograph placeholder representing quiet, unseen labor." />
+            </div>
+            <figcaption class="frame__caption">No. 02 — the quiet hours</figcaption>
+          </figure>
+        </div>
+        <div class="chapter__text">
+          <span class="chapter__number" data-reveal="up">Chapter Two</span>
+          <h3 class="chapter__title" data-reveal="up">
+            You carried more <em>than anyone saw.</em>
+          </h3>
+          <p class="chapter__body" data-reveal="up">
+            You carried weight no one was meant to see — late nights, quiet worries,
+            prayers whispered into the dark. We grew up dressed in your sacrifices,
+            and only now do we begin to understand what they cost.
+          </p>
+          <p class="chapter__body chapter__body--small" data-reveal="up">
+            Thank you for the things you never said you carried.
+          </p>
+        </div>
+      </article>
+
+      <!-- Chapter 03 -->
+      <article class="chapter">
+        <div class="chapter__media chapter__media--left">
+          <figure class="frame" data-parallax="0.06">
+            <div class="frame__inner">
+              <img class="frame__img" loading="lazy"
+                   src="assets/images/story-03.jpg"
+                   alt="A photograph placeholder representing the family you built." />
+            </div>
+            <figcaption class="frame__caption">No. 03 — the cathedral</figcaption>
+          </figure>
+        </div>
+        <div class="chapter__text">
+          <span class="chapter__number" data-reveal="up">Chapter Three</span>
+          <h3 class="chapter__title" data-reveal="up">
+            Your love built <em>this whole family.</em>
+          </h3>
+          <p class="chapter__body" data-reveal="up">
+            You built our family the way artists build cathedrals — slowly, patiently,
+            with hands that knew exactly where to place the light. Our home is your
+            quiet masterpiece.
+          </p>
+          <p class="chapter__body chapter__body--small" data-reveal="up">
+            Every soft thing in our lives is something you taught us how to make.
+          </p>
+        </div>
+      </article>
+
+      <!-- Chapter 04 -->
+      <article class="chapter chapter--reverse">
+        <div class="chapter__media chapter__media--right">
+          <figure class="frame frame--tall" data-parallax="0.07">
+            <div class="frame__inner">
+              <img class="frame__img" loading="lazy"
+                   src="assets/images/story-04.jpg"
+                   alt="A photograph placeholder representing the warmth of home." />
+            </div>
+            <figcaption class="frame__caption">No. 04 — kitchen light</figcaption>
+          </figure>
+        </div>
+        <div class="chapter__text">
+          <span class="chapter__number" data-reveal="up">Chapter Four</span>
+          <h3 class="chapter__title" data-reveal="up">
+            Home was always <em>wherever you were.</em>
+          </h3>
+          <p class="chapter__body" data-reveal="up">
+            It was never the walls or the address. Home was the smell of something
+            on the stove, your voice from another room, the exact warmth of your
+            shoulder against mine.
+          </p>
+          <p class="chapter__body chapter__body--small" data-reveal="up">
+            It still is.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 03 · MEMORY GALLERY
+         Polaroid-styled cards in a scattered grid.
+         Click for lightbox.
+         ═════════════════════════════════════════════ -->
+    <section class="gallery" id="gallery" aria-label="Memory gallery">
+      <header class="section-head">
+        <span class="chapter-mark" data-reveal="up">A small archive</span>
+        <h2 class="section-head__title" data-reveal="up">
+          The moments<br /><em>I refuse to forget.</em>
+        </h2>
+        <p class="section-head__sub" data-reveal="up">
+          Hover, linger, look closer. Each one was a chapter when it happened.
+        </p>
+      </header>
+
+      <div class="polaroids" id="polaroids">
+        <!-- Each .polaroid is hover-liftable and click-zoomable.
+             Tilt is set via inline --tilt CSS var. -->
+        <figure class="polaroid" style="--tilt: -3deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-01.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">two princesses smiling happily</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: 4deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-02.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">you and weerah with cows</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: -2deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-03.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">weerah yoinking my jacket that donkey</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: 5deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-04.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">us at the emergency doctor's visit (SCARED ME)</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: -4deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-05.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">a random instance of the kids just sleeping too close</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: 3deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-06.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">the first few chicken rices in this house</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: -5deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-07.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">the days when Thara was a sweet kid not a bossy donkey</figcaption>
+        </figure>
+
+        <figure class="polaroid" style="--tilt: 2deg" data-cursor="hover" tabindex="0">
+          <div class="polaroid__photo">
+            <img loading="lazy" src="assets/images/gallery-08.jpg"
+                 alt="A polaroid placeholder of a memory." />
+          </div>
+          <figcaption class="polaroid__caption">Random Face Mask Sesh</figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 04 · REASONS I LOVE YOU
+         Animated cards staggering in on scroll.
+         ═════════════════════════════════════════════ -->
+    <section class="reasons" aria-label="Reasons">
+      <header class="section-head section-head--center">
+        <span class="chapter-mark" data-reveal="up">Eight, of countless</span>
+        <h2 class="section-head__title" data-reveal="up">
+          Reasons,<br /><em>among too many to write.</em>
+        </h2>
+      </header>
+
+      <div class="reasons__grid">
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">01</span>
+          <p class="reason-card__text">Your strength taught me what <em>quiet courage</em> looks like.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">02</span>
+          <p class="reason-card__text">You made ordinary days feel like <em>ceremonies</em>.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">03</span>
+          <p class="reason-card__text">You loved us even on the days you had <em>nothing left to give</em>.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">04</span>
+          <p class="reason-card__text">You never stopped <em>believing</em> — in any of us.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">05</span>
+          <p class="reason-card__text">You turned our smallest moments <em>into memory</em>.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">06</span>
+          <p class="reason-card__text">You forgave us in ways we didn't always <em>deserve</em>.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">07</span>
+          <p class="reason-card__text">You taught me how to <em>come home to myself</em>.</p>
+        </article>
+        <article class="reason-card" data-reveal="card">
+          <span class="reason-card__num">08</span>
+          <p class="reason-card__text">You are, and always have been, <em>home</em>.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 05 · THE LETTER
+         Centerpiece. Paper texture, handwritten.
+         ═════════════════════════════════════════════ -->
+    <section class="letter-section" id="letter" aria-label="A letter">
+      <div class="letter-section__halo" aria-hidden="true"></div>
+
+      <header class="section-head section-head--center">
+        <span class="chapter-mark" data-reveal="up">A letter</span>
+        <h2 class="section-head__title" data-reveal="up">
+          <em>The things I have been</em><br />trying to tell you.
+        </h2>
+      </header>
+
+      <article class="letter" data-reveal="up">
+        <div class="letter__paper">
+          <div class="letter__lines" aria-hidden="true"></div>
+
+          <div class="letter__content">
+            <p class="letter__greeting">Amma,</p>
+
+            <p>There are things I have been trying to tell you my whole life,
+            and I think the reason I never could is because words always
+            seemed too small for them.</p>
+
+            <p>I want you to know that I see you. Not the version the world sees —
+            the practical, capable, ever-steady you — but the version who was tired
+            and kept going. The version who let her own dreams quietly wait. The
+            version who somehow always made room for ours.</p>
+
+            <p>I think about the small things now. The way you used to leave the
+            hallway light on, just in case. The way you'd hum without realising.
+            The way you'd ask if I'd eaten before you asked anything else. I used
+            to think those were ordinary. I know now they were the ordinary that
+            everything else was built on.</p>
+
+            <p>I am, in every way I can be, the work of your love. The patience you
+            taught me. The kindness you modelled before I had a name for it. The
+            quiet, stubborn hope you somehow planted in me without me ever noticing.</p>
+
+            <p>If I ever build anything beautiful in my life, it will be with the
+            tools you gave me.</p>
+
+            <p>Thank you for the meals I didn't thank you for. The arguments you
+            let me win. The fears you carried so I wouldn't have to. The version
+            of me you believed in long before I did.</p>
+
+            <p class="letter__emphasis">You are the gentlest extraordinary thing in my life.</p>
+
+            <p>I love you, Mum. More than I have ever known how to say.</p>
+
+            <p class="letter__sign">— always yours.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 06 · SURPRISE INTERACTIVE MOMENT
+         Particles converge into "I LOVE YOU MUM"
+         ═════════════════════════════════════════════ -->
+    <section class="constellation" id="constellation" aria-label="A surprise">
+      <header class="section-head section-head--center">
+        <span class="chapter-mark" data-reveal="up">Look up</span>
+        <h2 class="section-head__title" data-reveal="up">
+          Some things are easier<br /><em>in the language of stars.</em>
+        </h2>
+        <p class="section-head__sub" data-reveal="up">
+          Press the button. Watch the sky listen.
+        </p>
+      </header>
+
+      <div class="constellation__stage">
+        <canvas id="constellationCanvas" aria-hidden="true"></canvas>
+        <button class="constellation__btn" id="constellationBtn" data-cursor="hover">
+          <span>Make the stars speak</span>
+        </button>
+        <p class="constellation__hint" id="constellationHint" aria-live="polite"></p>
+      </div>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════
+         SECTION 07 · FINAL
+         ═════════════════════════════════════════════ -->
+    <section class="finale" aria-label="Closing">
+      <div class="finale__inner">
+        <p class="finale__quote" data-reveal="lines">
+          <span>If love had a language,</span>
+          <span><em>it would sound exactly like your name.</em></span>
+        </p>
+
+        <h2 class="finale__title" data-reveal="up">
+          <span class="finale__small">Happy</span>
+          <span class="finale__big">Mother's Day</span>
+        </h2>
+
+        <p class="finale__sign" data-reveal="up">
+          With all of me — and all of the stars.
+        </p>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__line"></div>
+        <p class="footer__text">
+          made with love · <span id="year">2026</span>
+        </p>
+        <p class="footer__hint" data-cursor="hover" id="easterEgg">
+          press <kbd>M</kbd> for a small secret
+        </p>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ─────────────────────────────────────────────
+       LIGHTBOX (for polaroid zoom)
+       ───────────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Photo viewer">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close" data-cursor="hover">×</button>
+    <figure class="lightbox__figure">
+      <img id="lightboxImg" alt="" />
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+  </div>
+
+  <!-- ─────────────────────────────────────────────
+       EASTER EGG OVERLAY
+       Triggered by pressing M.
+       ───────────────────────────────────────────── -->
+  <div class="secret" id="secret" aria-hidden="true">
+    <p class="secret__text">
+      You are the reason
+      <em>any of this exists.</em>
+    </p>
+  </div>
+
+  <!-- Main script -->
+  <script src="script.js"></script>
+</body>
+</html>
